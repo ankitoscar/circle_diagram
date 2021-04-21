@@ -159,6 +159,6 @@ Thumbs.db
 !.vscode/extensions.json
 *.code-workspace
 
-designer.exe
+designer.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/python,vscode
