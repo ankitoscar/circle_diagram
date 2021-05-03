@@ -21,17 +21,24 @@ class Ui_Dialog(object):
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(60, 60, 75, 16))
+        self.label.setGeometry(QtCore.QRect(60, 60, 130, 16))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(60, 110, 75, 16))
+        self.label_2.setGeometry(QtCore.QRect(60, 110, 130, 16))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(60, 200, 55, 26))
+        self.label_3.setGeometry(QtCore.QRect(60, 200, 100, 26))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(60, 150, 55, 26))
+        self.label_4.setGeometry(QtCore.QRect(60, 150, 110, 26))
         self.label_4.setObjectName("label_4")
+        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(150, 240, 121, 28))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(10)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
@@ -41,10 +48,11 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "Ø0  = "))
+        self.label.setText(_translate("Dialog", "Øo  = "))
         self.label_2.setText(_translate("Dialog", "Øsc  = "))
         self.label_3.setText(_translate("Dialog", "Isv = "))
         self.label_4.setText(_translate("Dialog", "Wsv = "))
+        self.pushButton.setText(_translate("Dialog", "Show Diagram"))
 
 
 if __name__ == "__main__":
