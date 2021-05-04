@@ -29,12 +29,13 @@ class App(QMainWindow):
         m = PlotCanvas(self, width=9, height=9)
         m.move(0,0)
 
-        button = QPushButton('PyQt5 button', self)
+        button = QPushButton('Close Diagram', self)
         button.setToolTip('This s an example button')
         button.move(700,25)
         button.resize(100,50)
 
         self.show()
+
 
 
 class PlotCanvas(FigureCanvas):

@@ -1,5 +1,6 @@
 import sys 
-from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QWidget
+import os
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog
 from mainWindow import * 
 from calculatedValues import *
 import numpy as np  
@@ -11,7 +12,7 @@ class Window(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.launchPopUp)
+        self.ui.pushButton.pressed.connect(self.launchPopUp)
         self.show()
 
     def launchPopUp(self):
@@ -27,6 +28,7 @@ class Popup(QDialog):
         self.ui = Ui_Dialog()
         self.parent = parent
         self.ui.setupUi(self)
+        self.ui.pushButton.clicked.connect(self.launchDiagram)
         self.show()
     
     def displayValues(self):
@@ -50,11 +52,13 @@ class Popup(QDialog):
         i_sv = float(i_sc) * (float(v_o)/float(v_sc))
 
         w_sv = round(np.sqrt(3)*np.float(v_o)*i_sv*np.float(pfB), 2)
-        print(w_sv)
 
         self.ui.label_3.setText(self.ui.label_3.text() + str(i_sv) + ' A')
         self.ui.label_4.setText(self.ui.label_4.text() + str(w_sv) + ' W')
 
+    def launchDiagram(self):
+        os.system('python plot.py')
+        
 
 if __name__=="__main__":
 
