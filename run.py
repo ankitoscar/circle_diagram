@@ -1,10 +1,18 @@
 import sys 
-import os
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QMainWindow
+
 from mainWindow import * 
 from calculatedValues import *
+from plot_diagram import *
 import numpy as np  
-from plot import *
+
+import matplotlib 
+matplotlib.use('Qt5Agg')
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
+from matplotlib.figure import Figure
+
 
 class Window(QWidget):
 
@@ -57,7 +65,37 @@ class Popup(QDialog):
         self.ui.label_4.setText(self.ui.label_4.text() + str(w_sv) + ' W')
 
     def launchDiagram(self):
-        os.system('python plot.py')
+        c = CircleDiagram(self)
+        c.show()
+        
+
+class MplCanvas(FigureCanvasQTAgg):
+
+    def __init__(self, parent=None, width=9, height=9, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
+
+class CircleDiagram(QMainWindow):
+
+    def __init__(self, *args, **kwargs):
+        super(CircleDiagram, self).__init__(*args, **kwargs)
+
+        sc = MplCanvas(self, width=9, height=9)
+        plot_circle_diagram(sc.axes)
+
+        # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
+        toolbar = NavigationToolbar(sc, self)
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(toolbar)
+        layout.addWidget(sc)
+
+        # Create a placeholder widget to hold our toolbar and canvas.
+        widget = QtWidgets.QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
+
         
 
 if __name__=="__main__":
