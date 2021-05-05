@@ -25,7 +25,7 @@ def slope(x_val, y_val):
 def base_circle_centre(m, y, c):
   return (y-c)/m
 
-def circle_intersection(x_val, y_val, x1, y1, y0):  
+def circle_intersection(x_val, y_val, x1, y1, y0, r):  
   m0 = slope([x_val[0], x_val[1]], [y_val[0], y_val[1]])
   a = m0*(y0 - y1) - x1
   c = m0*m0 + 1
@@ -40,35 +40,34 @@ def circle_intersection(x_val, y_val, x1, y1, y0):
   deg = np.arccos(yf/np.sqrt(yf**2 + xf**2))*180/np.pi
   return xf, yf, deg
 
-def plot_circle_diagram(i_o, i_A, i_B, pfA, pfB, w_o, w_sv, scaler = 1):
+def plot_circle_diagram(ax, i_o=40, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=149200, w_sv=27172.17, scaler = 1):
   scaler = 1
   org = [0, 0]
   iA = np.array([i_A * (np.sqrt(1-np.square(pfA))), i_A * pfA]) / scaler
   iB = np.array([i_B * (np.sqrt(1-np.square(pfB))), i_B * pfB]) / scaler
   lim = 1.5 * np.sqrt(iB[0]**2 + iB[1]**2)
-  plt.figure(figsize=(15,15))
-  plt.xlim([0, lim])
-  plt.ylim([0, lim])
-  plt.plot([org[0], iA[0]],[org[1], iA[1]])
-  plt.plot([org[0], iB[0]],[org[1], iB[1]])
-  plt.plot([iA[0], iB[0]],[iA[1], iB[1]])
-  plt.axhline(y= iA[1], xmin=iA[0]/lim, xmax=1, linestyle=':')
+  ax.set_xlim([0, lim])
+  ax.set_ylim([0, lim])
+  ax.plot([org[0], iA[0]],[org[1], iA[1]])
+  ax.plot([org[0], iB[0]],[org[1], iB[1]])
+  ax.plot([iA[0], iB[0]],[iA[1], iB[1]])
+  ax.axhline(y= iA[1], xmin=iA[0]/lim, xmax=1, linestyle=':')
   cx, cy, m = perpendicular([iA[0], iB[0]], [iA[1], iB[1]])
-  plt.plot([0, cx], [cy, 0], linestyle="--")
+  ax.plot([0, cx], [cy, 0], linestyle="--")
   y1 = iA[1]
   x1 = cx * (1 - (1/cy))
   theta = np.linspace(0, np.pi, 10000)
   r = x1 - iA[0]
   c = plt.Circle((x1, y1), radius= r, fill=False)
-  plt.gca().add_patch(c)
-  plt.axvline(x=iB[0], ymax=iB[1]/lim)
-  plt.axvline(x=iB[0], ymin=iB[1]/lim, ymax=(iB[1]+i_o*(w_o/w_sv))/lim)
-  plt.plot([iA[0], iB[0]],[iA[1], (iA[1] + iB[1])/2])
+  ax.add_patch(c)
+  ax.axvline(x=iB[0], ymax=iB[1]/lim)
+  ax.axvline(x=iB[0], ymin=iB[1]/lim, ymax=(iB[1]+i_o*(w_o/w_sv))/lim)
+  ax.plot([iA[0], iB[0]],[iA[1], (iA[1] + iB[1])/2])
   y0 = -slope([iA[0], iB[0]], [iA[1], iB[1]])*iB[0] + iB[1]*(1+i_o*(w_o/w_sv))
-  plt.plot([0,iB[0]], [y0, iB[1]*(1+i_o*(w_o/w_sv))])
-  xf, yf, deg = circle_intersection([iA[0], iB[0]], [iA[1], iB[1]], x1, y1, y0)
-  plt.plot([org[0], xf], [org[0], yf])
-  plt.axvline(x=xf, ymax= yf/lim)
+  ax.plot([0,iB[0]], [y0, iB[1]*(1+i_o*(w_o/w_sv))])
+  xf, yf, deg = circle_intersection([iA[0], iB[0]], [iA[1], iB[1]], x1, y1, y0, r)
+  ax.plot([org[0], xf], [org[0], yf])
+  ax.axvline(x=xf, ymax= yf/lim)
 
 
 
