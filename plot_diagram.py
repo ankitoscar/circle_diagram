@@ -40,7 +40,7 @@ def circle_intersection(x_val, y_val, x1, y1, y0, r):
   deg = np.arccos(yf/np.sqrt(yf**2 + xf**2))*180/np.pi
   return xf, yf, deg
 
-def plot_circle_diagram(ax, i_o=40, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=149200, w_sv=27172.17, scaler = 1):
+def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=27172.17, scaler = 1, x=0.5):
   scaler = 1
   org = [0, 0]
   iA = np.array([i_A * (np.sqrt(1-np.square(pfA))), i_A * pfA]) / scaler
@@ -55,16 +55,16 @@ def plot_circle_diagram(ax, i_o=40, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=14920
   cx, cy, m = perpendicular([iA[0], iB[0]], [iA[1], iB[1]])
   ax.plot([0, cx], [cy, 0], linestyle="--")
   y1 = iA[1]
-  x1 = cx * (1 - (1/cy))
+  x1 = cx * (1 - (y1/cy))
   theta = np.linspace(0, np.pi, 10000)
   r = x1 - iA[0]
   c = plt.Circle((x1, y1), radius= r, fill=False)
   ax.add_patch(c)
   ax.axvline(x=iB[0], ymax=iB[1]/lim)
-  ax.axvline(x=iB[0], ymin=iB[1]/lim, ymax=(iB[1]+i_o*(w_o/w_sv))/lim)
-  ax.plot([iA[0], iB[0]],[iA[1], (iA[1] + iB[1])/2])
-  y0 = -slope([iA[0], iB[0]], [iA[1], iB[1]])*iB[0] + iB[1]*(1+i_o*(w_o/w_sv))
-  ax.plot([0,iB[0]], [y0, iB[1]*(1+i_o*(w_o/w_sv))])
+  ax.axvline(x=iB[0], ymin=iB[1]/lim, ymax=(iB[1]*(1+(w_o/w_sv)))/lim)
+  ax.plot([iA[0], iB[0]],[iA[1], (iA[1] + iB[1])*x])
+  y0 = -slope([iA[0], iB[0]], [iA[1], iB[1]])*iB[0] + iB[1]*(1+(w_o/w_sv))
+  ax.plot([0,iB[0]], [y0, iB[1]*(1+(w_o/w_sv))])
   xf, yf, deg = circle_intersection([iA[0], iB[0]], [iA[1], iB[1]], x1, y1, y0, r)
   ax.plot([org[0], xf], [org[0], yf])
   ax.axvline(x=xf, ymax= yf/lim)
