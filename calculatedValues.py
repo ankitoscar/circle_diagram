@@ -47,7 +47,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Calculated Values"))
         self.label.setText(_translate("Dialog", "Øo  = "))
         self.label_2.setText(_translate("Dialog", "Øsc  = "))
         self.label_3.setText(_translate("Dialog", "Isv = "))
