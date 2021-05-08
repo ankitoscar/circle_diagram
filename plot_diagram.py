@@ -88,7 +88,12 @@ def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=2
   slip = round((yq-yr)/(yp-yr),3)
   eff = round((yp-yq)/yp, 4) * 100
   pf = round(yp/iL,2)
-  return iL, slip, eff, pf
+  xt = lim - 40
+  yt = lim - 5
+  ax.text(xt, yt, 'Load Current = '+str(iL)+' A', size = 10)
+  ax.text(xt, yt-5, 'Slip = '+str(slip), size = 10)
+  ax.text(xt, yt-10, 'Efficiency = '+str(eff) + '%', size = 10)
+  ax.text(xt, yt-15, 'Power Factor = '+str(pf), size = 10)
 
 
 
