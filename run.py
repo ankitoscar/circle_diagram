@@ -27,6 +27,10 @@ w_sv = 0
 
 class Window(QWidget):
 
+    """
+    Class for the main window where the inputs will be entered.
+    """
+
     def __init__(self):
         super().__init__()
         self.ui = Ui_Form()
@@ -41,6 +45,10 @@ class Window(QWidget):
 
 
 class Popup(QDialog):
+
+    """
+    Class for the popup which has intermediate values.
+    """
     
     def __init__(self, parent):
         super().__init__(parent)
@@ -104,6 +112,9 @@ class MplCanvas(FigureCanvasQTAgg):
         super(MplCanvas, self).__init__(fig)
 
 class CircleDiagram(QMainWindow):
+    """
+    Class for the window which has the circle diagram.
+    """
 
     def __init__(self, *args, **kwargs):
         super(CircleDiagram, self).__init__(*args, **kwargs)

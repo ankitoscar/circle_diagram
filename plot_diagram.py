@@ -11,6 +11,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def perpendicular(x_val, y_val):
+  """
+  This function gives the intercepts and slope of the perpendicular bisector of a given line segment.
+
+  Parameters
+  ----------
+  x_val, y_vals : coordinates of the two points of the line segments(x_val = [x1, x2], y_val = [y1, y2]).
+
+  Return
+  ----------
+  cx, cy : intercepts of the perpendicular bisector.
+  slope : slope of perpendicular bisector.
+  """
   slope = (y_val[1] - y_val[0])/(x_val[1] - x_val[0])
   q = (y_val[1] + y_val[0])/2 
   p = (x_val[1] + x_val[0])/2
@@ -20,12 +32,49 @@ def perpendicular(x_val, y_val):
   return cx, cy, slope
 
 def slope(x_val, y_val):
+  """
+  This function returns the slope of a line segment.
+
+  Parameters
+  ----------
+  x_val, y_vals : coordinates of the two points of the line segments(x_val = [x1, x2], y_val = [y1, y2]).
+
+  Return
+  ----------
+  slope of line segment.
+  
+  """
   return ((y_val[1]-y_val[0])/(x_val[1]-x_val[0]))
 
 def base_circle_centre(m, y, c):
+  """
+  This function returns the intersection of perpendicular bisector with the base line.
+
+  Parameters
+  ----------
+  m : slope
+  y : y-cooordinate of the base line.
+  c : y-intercept of the perpendicular bisector.
+
+  """
   return (y-c)/m
 
 def circle_intersection(x_val, y_val, x1, y1, y0, r):  
+  """
+  This function returns the left most point of the intersection of the line starting from A\' parallel to O\'A and the circle.
+
+  Parameters
+  ----------
+  x_val, y_val : coordinates of the two points of the line segments(x_val = [x1, x2], y_val = [y1, y2]).
+  x1, y1 : centre of the circle
+  y0 : y-intercept of the required line
+  r : radius of the circle
+
+  Return 
+  ----------
+  xf, yf : coordinates of the intersection
+  deg: angle between y-axis and the line joining origin and (xf, yf).
+  """
   m0 = slope([x_val[0], x_val[1]], [y_val[0], y_val[1]])
   a = m0*(y0 - y1) - x1
   c = m0*m0 + 1
@@ -41,6 +90,24 @@ def circle_intersection(x_val, y_val, x1, y1, y0, r):
   return xf, yf, deg
 
 def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=27172.17, scaler = 1, x=0.5):
+  """
+  This function draws the circle diagram of the induction motor based on the values entered.
+
+  Paremeters
+  ----------
+  ax : Matplotlib axis on which the diagram will be drawn.
+  i_A : no load current.
+  i_B : short circuit current.
+  pfA : power factor of no load test.
+  pfB : power factor of short circuit test.
+  w_o : power rating. 
+  w_sv : power consumed.
+  x : rated cu loss factor.
+
+  Return
+  --------
+  None, the function draws the diagram on the axis in the window.
+  """
   scaler = 1
   org = [0, 0]
   iA = np.array([i_A * (np.sqrt(1-np.square(pfA))), i_A * pfA]) / scaler
