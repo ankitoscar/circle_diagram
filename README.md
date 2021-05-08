@@ -10,6 +10,8 @@
 * Install all packages mentioned in requirements.txt file.
 * Then run the *run.py* file in the terminal, for windows : **python run.py.** 
 
+# About the project
+
 This is GUI-based project which takes the parameters of induction motor and draws its [circle diagram.](https://www.electrical4u.com/circle-diagram)
 
     The objectives of this project:
