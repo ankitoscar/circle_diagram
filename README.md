@@ -12,14 +12,14 @@
 
 # About the project
 
-This is GUI-based project which takes the parameters of induction motor and draws its [circle diagram.](https://www.electrical4u.com/circle-diagram)
+This is GUI-based project which takes the parameters of induction motor and draws its [circle diagram](https://www.electrical4u.com/circle-diagram).
 
     The objectives of this project:
   - To produce an image of circle diagram based on the input provided by user.
 
 # Features
 
-  - Although the project is still incomplete, we intend to have more parameters which are to calculated from the diagram.
+  - Create a setup file for the project.
   - We also aspire to make better generated images of the circle diagram.
 
 
@@ -41,6 +41,7 @@ The libraries and frameworks used in this project till now are:
 ### Versions:
 
 - 1.0 - Only added basic functionalities, need to fix some diagram parameters.
+- 1.0.1 - Added more calculated parameters in the circle diagram.
 
 
 License
