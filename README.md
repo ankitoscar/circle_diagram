@@ -17,12 +17,6 @@ This is GUI-based project which takes the parameters of induction motor and draw
     The objectives of this project:
   - To produce an image of circle diagram based on the input provided by user.
 
-# Features
-
-  - Create a setup file for the project.
-  - We also aspire to make better generated images of the circle diagram.
-
-
 
 # Tech
 
@@ -31,6 +25,10 @@ The libraries and frameworks used in this project till now are:
 * [NumPy](https://numpy.org/) - Awesome mathematical library for python
 * [Matplotlib](https://matplotlib.org/) - For data visualization.
 * [PyQt5](https://qt.io/) - Python library for making interactive GUI applications.
+
+## To Dos
+
+- Create a setup file for the project.
 
 
 ## Contributors
