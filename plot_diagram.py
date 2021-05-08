@@ -51,6 +51,8 @@ def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=2
   ax.plot([org[0], iA[0]],[org[1], iA[1]])
   ax.plot([org[0], iB[0]],[org[1], iB[1]])
   ax.plot([iA[0], iB[0]],[iA[1], iB[1]])
+  ax.annotate('O\'', (iA[0], iA[1]))
+  ax.annotate('A', (iB[0], iB[1]))
   ax.axhline(y= iA[1], xmin=iA[0]/lim, xmax=1, linestyle=':')
   cx, cy, m = perpendicular([iA[0], iB[0]], [iA[1], iB[1]])
   ax.plot([0, cx], [cy, 0], linestyle="--")
@@ -60,14 +62,33 @@ def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=2
   r = x1 - iA[0]
   c = plt.Circle((x1, y1), radius= r, fill=False)
   ax.add_patch(c)
+  ax.annotate('B', (iA[0]+2*r, iA[1]))
+  ax.annotate('C', (x1, y1))
+  ax.annotate('D', (iB[0], iA[1]))
   ax.axvline(x=iB[0], ymax=iB[1]/lim)
   ax.axvline(x=iB[0], ymin=iB[1]/lim, ymax=(iB[1]*(1+(w_o/w_sv)))/lim)
   ax.plot([iA[0], iB[0]],[iA[1], (iA[1] + iB[1])*x])
+  ax.annotate('E', (iB[0], (iB[1]+iA[1])*x))
   y0 = -slope([iA[0], iB[0]], [iA[1], iB[1]])*iB[0] + iB[1]*(1+(w_o/w_sv))
   ax.plot([0,iB[0]], [y0, iB[1]*(1+(w_o/w_sv))])
-  xf, yf, deg = circle_intersection([iA[0], iB[0]], [iA[1], iB[1]], x1, y1, y0, r)
-  ax.plot([org[0], xf], [org[0], yf])
-  ax.axvline(x=xf, ymax= yf/lim)
+  ax.annotate('A\'', (iB[0],iB[1]*(1+(w_o/w_sv))))
+  xp, yp, deg = circle_intersection([iA[0], iB[0]], [iA[1], iB[1]], x1, y1, y0, r)
+  ax.plot([org[0], xp], [org[0], yp])
+  ax.axvline(x=xp, ymax= yp/lim)
+  ax.annotate('P', (xp,yp))
+  xq = xp
+  yq = ((iB[1]-iA[1])/(iB[0]-iA[0]))*(xp-iA[0])+iA[1]
+  ax.annotate('Q', (xq,yq))
+  xr = xp
+  yr = (((iB[1]-iA[1])/2)/(iB[0]-iA[0]))*(xp-iA[0])+iA[1]
+  ax.annotate('R', (xr,yr))
+  ax.annotate('S', (xp,iA[1]))
+  ax.annotate('T', (xp,0))
+  iL = round(np.sqrt(xp**2 + yp**2), 2)
+  slip = round((yq-yr)/(yp-yr),3)
+  eff = round((yp-yq)/yp, 4) * 100
+  pf = round(yp/iL,2)
+  return iL, slip, eff, pf
 
 
 
