@@ -24,6 +24,7 @@ x = 0
 w_o = 0
 w_sv = 0
 
+
 class Window(QWidget):
 
     def __init__(self):
@@ -109,6 +110,7 @@ class CircleDiagram(QMainWindow):
 
         sc = MplCanvas(self, width=15, height=9)
         plot_circle_diagram(sc.axes, i_A=i_A, i_B=i_B, pfA=pfA, pfB=pfB, w_o=w_o, w_sv=w_sv, x=0.5)
+        
 
         # Create toolbar, passing canvas as first parament, parent (self, the MainWindow) as second.
         toolbar = NavigationToolbar(sc, self)
