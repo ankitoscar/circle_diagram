@@ -147,7 +147,7 @@ def plot_circle_diagram(ax, i_A=11, i_B=100, pfA=0.2, pfB=0.4, w_o=18920, w_sv=2
   yq = ((iB[1]-iA[1])/(iB[0]-iA[0]))*(xp-iA[0])+iA[1]
   ax.annotate('Q', (xq,yq))
   xr = xp
-  yr = (((iB[1]-iA[1])/2)/(iB[0]-iA[0]))*(xp-iA[0])+iA[1]
+  yr = (((iB[1]-iA[1])*(1-x))/(iB[0]-iA[0]))*(xp-iA[0])+iA[1]
   ax.annotate('R', (xr,yr))
   ax.annotate('S', (xp,iA[1]))
   ax.annotate('T', (xp,0))

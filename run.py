@@ -35,6 +35,7 @@ class Window(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon('icon.png'))
         self.ui.pushButton.pressed.connect(self.launchPopUp)
         self.show()
 
